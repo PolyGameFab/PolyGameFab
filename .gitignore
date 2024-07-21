@@ -1,2 +1,9 @@
-.idea/
+# Build directories 
 cmake-build-debug/
+build/
+
+# Vscode directories
+.vscode/
+
+
+.idea/
