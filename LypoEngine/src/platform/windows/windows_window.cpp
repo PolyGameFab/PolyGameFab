@@ -4,7 +4,7 @@ namespace platform
 {
     namespace windows
     {
-        WindowsWindow::WindowsWindow(const std::string& title, const uint32_t& width, const uint32_t& height) noexcept : WindowsWindow(core::WindowProps(title, width, height)) {}
+        WindowsWindow::WindowsWindow(const std::string& title, const uint32_t& width, const uint32_t& height, const core::WindowFlags& flag) noexcept : WindowsWindow(core::WindowProps(title, width, height, flag)) {}
         
         WindowsWindow::WindowsWindow(const core::WindowProperties& properties) noexcept
         {
@@ -21,14 +21,27 @@ namespace platform
             data_.title_ = properties.title_;
             data_.width_ = properties.width_;
             data_.height_ = properties.height_;
-            
+
             if (counter_ == 0)
             {
                 int result = glfwInit();
             }
 
             {
-                window_ = glfwCreateWindow(data_.width_, data_.height_, data_.title_.c_str(), NULL, NULL);
+                switch (properties.flag_)
+                {
+                    case core::WindowFlags::FULLSCREEN:
+                        monitor_ = glfwGetPrimaryMonitor();
+                    case core::WindowFlags::DEFAULT:
+                        window_ = glfwCreateWindow(data_.width_, data_.height_, data_.title_.c_str(), monitor_, NULL);
+                        break;
+                    case core::WindowFlags::WINDOWED_FULLSCREEN:
+                        window_ = glfwCreateWindow(data_.width_, data_.height_, data_.title_.c_str(),monitor_, NULL);
+                        monitor_ = glfwGetPrimaryMonitor();
+                        mode_ = glfwGetVideoMode(monitor_);
+                        glfwSetWindowMonitor(window_, monitor_, 0, 0, mode_->width, mode_->height, mode_->refreshRate);
+                        break;
+                }
                 ++counter_;
             }  
 

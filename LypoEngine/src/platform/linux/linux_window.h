@@ -14,7 +14,7 @@ namespace platform
         class LinuxWindow : public core::Window
         {
         public:
-            LinuxWindow(const std::string& title, const uint32_t& width, const uint32_t& height) noexcept;
+            LinuxWindow(const std::string& title, const uint32_t& width, const uint32_t& height, const core::WindowFlags& flag = core::WindowFlags::DEFAULT) noexcept;
             LinuxWindow(const core::WindowProperties& properties) noexcept;
             virtual ~LinuxWindow() noexcept override;
 
@@ -34,6 +34,8 @@ namespace platform
             inline static uint8_t counter_ = 0;
             
             GLFWwindow* window_;
+            GLFWmonitor* monitor_ = nullptr;
+            const GLFWvidmode* mode_ = nullptr;
             
             typedef struct LinuxData
             {

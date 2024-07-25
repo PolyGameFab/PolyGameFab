@@ -14,7 +14,7 @@ namespace platform
         class WindowsWindow : public core::Window
         {
         public:
-            WindowsWindow(const std::string& title, const uint32_t& width, const uint32_t& height) noexcept;
+            WindowsWindow(const std::string& title, const uint32_t& width, const uint32_t& height, const core::WindowFlags& flag = core::WindowFlags::DEFAULT) noexcept;
             WindowsWindow(const core::WindowProperties& properties) noexcept;
             virtual ~WindowsWindow() noexcept override;
 
@@ -33,7 +33,10 @@ namespace platform
         private:
             inline static uint8_t counter_ = 0;
             
-            GLFWwindow* window_;
+            
+            GLFWwindow* window_ = nullptr;
+            GLFWmonitor* monitor_ = nullptr;
+            const GLFWvidmode* mode_ = nullptr;
             
             typedef struct WindowsData
             {

@@ -1,19 +1,28 @@
 #pragma once
 
 #include "templates.h"
+#include "macros.h"
 #include <string>
 
 namespace core 
 {
+    typedef enum class WindowFlags
+    {
+        DEFAULT = DEFAULT_VALUE,
+        WINDOWED_FULLSCREEN = WINDOWED_FULLSCREEN_VALUE,
+        FULLSCREEN = FULLSCREEN_VALUE
+    } WFlags;
+
     typedef struct WindowProperties 
     {
         std::string title_;
         uint32_t width_, height_;
+        WFlags flag_;
 
-        inline WindowProperties() noexcept : WindowProperties("", 0, 0) {}
+        inline WindowProperties() noexcept : WindowProperties("", 0, 0, WindowFlags::DEFAULT) {}
         inline WindowProperties(const std::string& title, const uint32_t& width, 
-                                const uint32_t& height) noexcept 
-                            : title_(title), width_(width), height_(height) {}
+                                const uint32_t& height, const WindowFlags& flag) noexcept 
+                            : title_(title), width_(width), height_(height), flag_(flag) {}
     } WindowProps;
 
     class Window 
