@@ -9,14 +9,14 @@
 
 namespace platform 
 {
-    namespace windows
+    namespace linux
     {
-        class WindowsWindow : public core::Window
+        class LinuxWindow : public core::Window
         {
         public:
-            WindowsWindow(const std::string& title, const uint32_t& width, const uint32_t& height) noexcept;
-            WindowsWindow(const core::WindowProperties& properties) noexcept;
-            virtual ~WindowsWindow() noexcept override;
+            LinuxWindow(const std::string& title, const uint32_t& width, const uint32_t& height) noexcept;
+            LinuxWindow(const core::WindowProperties& properties) noexcept;
+            virtual ~LinuxWindow() noexcept override;
 
             void onUpdate() override;
 
@@ -35,7 +35,7 @@ namespace platform
             
             GLFWwindow* window_;
             
-            typedef struct WindowsData
+            typedef struct LinuxData
             {
                 std::string title_;
                 uint32_t width_, height_;
