@@ -22,28 +22,29 @@ namespace platform
             data_.width_ = properties.width_;
             data_.height_ = properties.height_;
             
-            if (counter_ == 0)
-            {
-                int result = glfwInit();
-            }
+            int result = glfwInit();
 
+            switch (properties.flag_)
             {
-                switch (properties.flag_)
-                {
-                    case core::WindowFlags::FULLSCREEN:
-                        monitor_ = glfwGetPrimaryMonitor();
-                    case core::WindowFlags::DEFAULT:
-                        window_ = glfwCreateWindow(data_.width_, data_.height_, data_.title_.c_str(), monitor_, NULL);
-                        break;
-                    case core::WindowFlags::WINDOWED_FULLSCREEN:
-                        window_ = glfwCreateWindow(data_.width_, data_.height_, data_.title_.c_str(),monitor_, NULL);
-                        monitor_ = glfwGetPrimaryMonitor();
-                        mode_ = glfwGetVideoMode(monitor_);
-                        glfwSetWindowMonitor(window_, monitor_, 0, 0, mode_->width, mode_->height, mode_->refreshRate);
-                        break;
-                }
-                ++counter_;
-            }  
+            case core::WindowFlags::FULLSCREEN:
+                monitor_ = glfwGetPrimaryMonitor();
+            case core::WindowFlags::DEFAULT:
+                window_ = glfwCreateWindow(data_.width_, data_.height_, data_.title_.c_str(), monitor_, NULL);
+                break;
+            case core::WindowFlags::WINDOWED_FULLSCREEN:
+                window_ = glfwCreateWindow(data_.width_, data_.height_, data_.title_.c_str(), monitor_, NULL);
+                monitor_ = glfwGetPrimaryMonitor();
+                mode_ = glfwGetVideoMode(monitor_);
+                glfwSetWindowMonitor(window_, monitor_, 0, 0, mode_->width, mode_->height, mode_->refreshRate);
+                break;
+            }
+            glfwMakeContextCurrent(window_);
+
+            if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+            {
+                std::cout << "Error in glad load" << std::endl;
+                return;
+            }
 
             glfwSetWindowUserPointer(window_, &data_);
             setVSync(true);
@@ -52,12 +53,7 @@ namespace platform
         void LinuxWindow::shutdown() noexcept
         {
             glfwDestroyWindow(window_);
-            --counter_;
-
-            if(counter_ == 0)
-            {
-                glfwTerminate();
-            }
+            glfwTerminate();
         }
 
         void LinuxWindow::onUpdate()

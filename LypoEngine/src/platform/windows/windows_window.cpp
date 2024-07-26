@@ -22,14 +22,10 @@ namespace platform
             data_.width_ = properties.width_;
             data_.height_ = properties.height_;
 
-            if (counter_ == 0)
-            {
-                int result = glfwInit();
-            }
+            int result = glfwInit();
 
+            switch (properties.flag_)
             {
-                switch (properties.flag_)
-                {
                     case core::WindowFlags::FULLSCREEN:
                         monitor_ = glfwGetPrimaryMonitor();
                     case core::WindowFlags::DEFAULT:
@@ -41,27 +37,30 @@ namespace platform
                         mode_ = glfwGetVideoMode(monitor_);
                         glfwSetWindowMonitor(window_, monitor_, 0, 0, mode_->width, mode_->height, mode_->refreshRate);
                         break;
-                }
-                ++counter_;
-            }  
+            }
+            glfwMakeContextCurrent(window_);
+
+            if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
+            {
+                std::cout << "Error in glad load" << std::endl;
+                return;
+            }
 
             glfwSetWindowUserPointer(window_, &data_);
             setVSync(true);
         }
 
         void WindowsWindow::shutdown() noexcept
-        {
+        { 
             glfwDestroyWindow(window_);
-            --counter_;
-
-            if(counter_ == 0)
-            {
-                glfwTerminate();
-            }
+            glfwTerminate();
         }
 
         void WindowsWindow::onUpdate()
         {
+            /* Swap front and back buffers */
+            glfwSwapBuffers(window_);
+
             glfwPollEvents();
         }
 

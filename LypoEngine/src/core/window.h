@@ -1,16 +1,16 @@
 #pragma once
 
 #include "templates.h"
-#include "macros.h"
 #include <string>
+#include <cstdint>
 
 namespace core 
 {
     typedef enum class WindowFlags
     {
-        DEFAULT = DEFAULT_VALUE,
-        WINDOWED_FULLSCREEN = WINDOWED_FULLSCREEN_VALUE,
-        FULLSCREEN = FULLSCREEN_VALUE
+        DEFAULT,
+        WINDOWED_FULLSCREEN,
+        FULLSCREEN
     } WFlags;
 
     typedef struct WindowProperties 
@@ -40,6 +40,7 @@ namespace core
 
        virtual void* getNativeWindow() const = 0;
 
+       static LypoUniquePtr<Window> Create(const std::string& title, const uint32_t& width, const uint32_t& height, const core::WindowFlags& flag);
        static LypoUniquePtr<Window> Create(const WindowProperties& properties = WindowProperties());
     };
 }

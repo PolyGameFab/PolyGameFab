@@ -1,11 +1,14 @@
 #pragma once
 
 #include "../../core/window.h"
-#include "../../core/templates.h"
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <iostream>
+
 #include <string>
+#include <cstdint>
 
 namespace platform 
 {
@@ -31,9 +34,6 @@ namespace platform
             virtual void initialize(const core::WindowProperties& properties) noexcept;
             virtual void shutdown() noexcept;
         private:
-            inline static uint8_t counter_ = 0;
-            
-            
             GLFWwindow* window_ = nullptr;
             GLFWmonitor* monitor_ = nullptr;
             const GLFWvidmode* mode_ = nullptr;

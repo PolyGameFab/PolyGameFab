@@ -31,8 +31,6 @@ namespace platform
             virtual void initialize(const core::WindowProperties& properties) noexcept;
             virtual void shutdown() noexcept;
         private:
-            inline static uint8_t counter_ = 0;
-            
             GLFWwindow* window_;
             GLFWmonitor* monitor_ = nullptr;
             const GLFWvidmode* mode_ = nullptr;
