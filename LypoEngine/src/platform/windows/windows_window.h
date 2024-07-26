@@ -1,12 +1,14 @@
+//
+// Created by GuillaumeIsCoding on 7/26/2024.
+//
 #pragma once
 
-#include "../../core/window.h"
+#include "core/window.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <iostream>
-
 #include <string>
 #include <cstdint>
 
@@ -14,6 +16,9 @@ namespace platform
 {
     namespace windows
     {
+        /**
+         * @brief Windows concrete class of core::Window
+         */
         class WindowsWindow : public core::Window
         {
         public:

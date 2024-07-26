@@ -1,3 +1,6 @@
+//
+// Created by GuillaumeIsCoding on 7/26/2024.
+//
 #pragma once
 
 #include <memory>

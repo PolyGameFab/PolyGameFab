@@ -1,3 +1,6 @@
+//
+// Created by GuillaumeIsCoding on 7/26/2024.
+//
 #include "linux_window.h"
 
 namespace platform

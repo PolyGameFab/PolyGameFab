@@ -1,16 +1,24 @@
+//
+// Created by GuillaumeIsCoding on 7/26/2024.
+//
 #pragma once
 
-#include "../../core/window.h"
-#include "../../core/templates.h"
+#include "core/window.h"
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <iostream>
 #include <string>
+#include <cstdint>
 
 namespace platform 
 {
     namespace linux
     {
+        /**
+         * @brief Linux concrete class of core::Window
+         */
         class LinuxWindow : public core::Window
         {
         public:
