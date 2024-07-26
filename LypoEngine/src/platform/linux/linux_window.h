@@ -14,7 +14,7 @@
 
 namespace platform 
 {
-    namespace linux
+    namespace unix
     {
         /**
          * @brief Linux concrete class of core::Window

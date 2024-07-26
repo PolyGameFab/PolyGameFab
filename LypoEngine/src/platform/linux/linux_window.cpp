@@ -5,7 +5,7 @@
 
 namespace platform
 {
-    namespace linux
+    namespace unix
     {
         LinuxWindow::LinuxWindow(const std::string& title, const uint32_t& width, const uint32_t& height, const core::WindowFlags& flag) noexcept : LinuxWindow(core::WindowProps(title, width, height, flag)) {}
         

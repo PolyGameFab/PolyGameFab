@@ -8,7 +8,7 @@
 
 int main(void)
 {
-    core::LypoUniquePtr<core::Window> window = core::Window::Create("Hello World", 600, 700, core::WFlags::DEFAULT);
+    core::LypoUniquePtr<core::Window> window = core::Window::Create("Windows Window", 600, 700, core::WFlags::DEFAULT);
    
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(reinterpret_cast<GLFWwindow*>(window->getNativeWindow())))

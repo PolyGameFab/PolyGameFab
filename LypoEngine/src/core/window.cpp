@@ -4,10 +4,10 @@
 #include "window.h"
 
 #ifdef LYPO_PLATFORM_WINDOWS
-    #include "../platform/windows/windows_window.h"
+    #include "platform/windows/windows_window.h"
 #endif
 #ifdef LYPO_PLATFORM_LINUX
-    #include "../platform/linux/linux_window.h"
+    #include "platform/linux/linux_window.h"
 #endif
 
 namespace core
@@ -23,7 +23,7 @@ namespace core
             return CreateLypoUniquePtr<platform::windows::WindowsWindow>(title, width, height, flag);
         #endif
         #ifdef LYPO_PLATFORM_LINUX
-            return CreateLypoUniquePtr<platform::linux::LinuxWindow>(title, width, height, flag);
+            return CreateLypoUniquePtr<platform::unix::LinuxWindow>(title, width, height, flag);
         #else
             return nullptr;
         #endif
