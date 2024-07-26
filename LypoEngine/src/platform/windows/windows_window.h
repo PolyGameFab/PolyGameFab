@@ -14,8 +14,6 @@
 
 namespace platform 
 {
-    namespace windows
-    {
         /**
          * @brief Windows concrete class of core::Window
          */
@@ -52,5 +50,4 @@ namespace platform
 
             data data_;
         };
-    }
 }

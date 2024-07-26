@@ -5,8 +5,6 @@
 
 namespace platform
 {
-    namespace windows
-    {
         WindowsWindow::WindowsWindow(const std::string& title, const uint32_t& width, const uint32_t& height, const core::WindowFlags& flag) noexcept : WindowsWindow(core::WindowProps(title, width, height, flag)) {}
         
         WindowsWindow::WindowsWindow(const core::WindowProperties& properties) noexcept
@@ -93,5 +91,4 @@ namespace platform
         {
             return window_;
         }
-    }
 }
