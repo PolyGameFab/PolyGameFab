@@ -3,8 +3,6 @@
 //
 #pragma once
 
-#include "templates.h"
-
 #include <string>
 #include <cstdint>
 
@@ -69,27 +67,6 @@ namespace core
        /**
         * @brief Get the implemented platform window
         */
-       virtual void* getNativeWindow() const = 0;
-
-       /**
-        * @brief Create a unique pointer for a Linux or Windows window
-        * 
-        * @param title(std::string) Window title
-        * @param width(uint32_t) Window width
-        * @param height(uint32_t) Window height
-        * @param flag(WindowFlags) Window flag 
-        * 
-        * @overload
-        */
-       static LypoUniquePtr<Window> Create(const std::string& title, const uint32_t& width, const uint32_t& height, const WindowFlags& flag);
-
-       /**
-        * @brief Create a unique pointer for a Linux or Windows window
-        * 
-        * @param properties(WindowProperties) Window properties 
-        * 
-        * @overload
-        */
-       static LypoUniquePtr<Window> Create(const WindowProperties& properties = WindowProperties());
+       inline virtual void* getNativeWindow() const = 0;
     };
 }

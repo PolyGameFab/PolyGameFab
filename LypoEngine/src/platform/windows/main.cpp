@@ -4,19 +4,19 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "core/window.h"
+#include "windows_window.h"
 
 int main(void)
 {
-    core::LypoUniquePtr<core::Window> window = core::Window::Create("Windows Window", 600, 700, core::WFlags::DEFAULT);
+    platform::WindowsWindow window = platform::WindowsWindow("Windows Window", 600, 700, core::WindowFlags::DEFAULT);
    
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(reinterpret_cast<GLFWwindow*>(window->getNativeWindow())))
+    while (!glfwWindowShouldClose(reinterpret_cast<GLFWwindow*>(window.getNativeWindow())))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
         /* Poll for and process events */
-        window->onUpdate();
+        window.onUpdate();
     }
     return 0;
 }
