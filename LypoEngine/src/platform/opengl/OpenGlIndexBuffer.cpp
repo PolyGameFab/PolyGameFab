@@ -13,11 +13,11 @@ namespace Lypo {
         glDeleteBuffers(1, &bufferID_);
     }
 
-    void OpenGlIndexBuffer::Bind() const {
+    void OpenGlIndexBuffer::bind() const {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferID_);
     }
 
-    void OpenGlIndexBuffer::Unbind() const {
+    void OpenGlIndexBuffer::unbind() const {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 }

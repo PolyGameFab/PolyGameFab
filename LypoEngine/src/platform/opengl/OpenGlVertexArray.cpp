@@ -27,42 +27,42 @@ namespace Lypo {
 
     OpenGLVertexArray::OpenGLVertexArray()
     {
-        glCreateVertexArrays(1, &_RendererID);
+        glCreateVertexArrays(1, &rendererID_);
     }
 
     OpenGLVertexArray::~OpenGLVertexArray()
     {
-        glDeleteVertexArrays(1, &_RendererID);
+        glDeleteVertexArrays(1, &rendererID_);
     }
 
-    void OpenGLVertexArray::Bind() const
+    void OpenGLVertexArray::bind() const
     {
-        glBindVertexArray(_RendererID);
+        glBindVertexArray(rendererID_);
     }
 
-    void OpenGLVertexArray::Unbind() const
+    void OpenGLVertexArray::unbind() const
     {
         glBindVertexArray(0);
     }
 
-    void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer> &vertexBuffer) {
-        if (vertexBuffer->GetLayout().GetElements().size() == 0) {
+    void OpenGLVertexArray::addVertexBuffer(const std::shared_ptr<VertexBuffer> &vertexBuffer) {
+        if (vertexBuffer->getLayout().getElements().size() == 0) {
             //TODO: log error: VertexBuffer has no layout
         }
 
-        glBindVertexArray(_RendererID);
-        vertexBuffer->Bind();
+        glBindVertexArray(rendererID_);
+        vertexBuffer->bind();
 
         uint32_t index = 0;
-        const auto& layout = vertexBuffer->GetLayout();
+        const auto& layout = vertexBuffer->getLayout();
         for (const auto& element : layout)
         {
             glEnableVertexAttribArray(index);
             glVertexAttribPointer(index,
-                                  element.GetComponentCount(),
+                                  element.getComponentCount(),
                                   ShaderDataTypeToOpenGLBaseType(element.Type),
                                   element.Normalized ? GL_TRUE : GL_FALSE,
-                                  layout.GetStride(),
+                                  layout.getStride(),
                                   (const void*)element.Offset);
             index++;
         }
@@ -70,10 +70,10 @@ namespace Lypo {
         vertexBuffers_.push_back(vertexBuffer);
     }
 
-    void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
+    void OpenGLVertexArray::setIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
     {
-        glBindVertexArray(_RendererID);
-        indexBuffer->Bind();
+        glBindVertexArray(rendererID_);
+        indexBuffer->bind();
 
         indexBuffer_ = indexBuffer;
     }
