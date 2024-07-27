@@ -10,7 +10,7 @@ namespace Lypo {
 	class Renderer
 	{
 	public:
-		inline static RendererAPI GetAPI() { return rendererAPI_; }
+		inline static RendererAPI getApi() { return rendererAPI_; }
 	private:
 		static RendererAPI rendererAPI_;
 	};

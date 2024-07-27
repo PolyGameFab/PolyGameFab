@@ -22,7 +22,7 @@ int main(void)
     if (!glfwInit())
         return -1;
 
-    /* Create a windowed mode window and its OpenGL context */
+    /* create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
     if (!window)
     {
@@ -51,7 +51,7 @@ int main(void)
     std::shared_ptr<Lypo::VertexArray> vertexArray;
     std::shared_ptr<Lypo::VertexArray> squareVA;
 
-    vertexArray.reset(Lypo::VertexArray::Create());
+    vertexArray.reset(Lypo::VertexArray::create());
 
     float vertices[3 * 7] = {
             -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -60,21 +60,21 @@ int main(void)
     };
 
     std::shared_ptr<Lypo::VertexBuffer> vertexBuffer;
-    vertexBuffer.reset(Lypo::VertexBuffer::Create(vertices, sizeof(vertices)));
+    vertexBuffer.reset(Lypo::VertexBuffer::create(vertices, sizeof(vertices)));
     Lypo::BufferLayout layout = {
             { Lypo::ShaderDataType::Float3, "a_Position" },
             { Lypo::ShaderDataType::Float4, "a_Color" }
     };
-    vertexBuffer->SetLayout(layout);
+    vertexBuffer->setLayout(layout);
 
-    vertexArray->AddVertexBuffer(vertexBuffer);
+    vertexArray->addVertexBuffer(vertexBuffer);
 
     uint32_t indices[3] = { 0, 1, 2 };
     std::shared_ptr<Lypo::IndexBuffer> indexBuffer;
-    indexBuffer.reset(Lypo::IndexBuffer::Create(indices, sizeof(indices)));
-    vertexArray->SetIndexBuffer(indexBuffer);
+    indexBuffer.reset(Lypo::IndexBuffer::create(indices, sizeof(indices)));
+    vertexArray->setIndexBuffer(indexBuffer);
 
-    squareVA.reset(Lypo::VertexArray::Create());
+    squareVA.reset(Lypo::VertexArray::create());
 
     float squareVertices[3 * 4] = {
             -0.75f, -0.75f, 0.0f,
@@ -84,16 +84,16 @@ int main(void)
     };
 
     std::shared_ptr<Lypo::VertexBuffer> squareVB;
-    squareVB.reset(Lypo::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-    squareVB->SetLayout({
-                                { Lypo::ShaderDataType::Float3, "a_Position" }
+    squareVB.reset(Lypo::VertexBuffer::create(squareVertices, sizeof(squareVertices)));
+    squareVB->setLayout({
+                                {Lypo::ShaderDataType::Float3, "a_Position"}
                         });
-    squareVA->AddVertexBuffer(squareVB);
+    squareVA->addVertexBuffer(squareVB);
 
     uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
     std::shared_ptr<Lypo::IndexBuffer> squareIB;
-    squareIB.reset(Lypo::IndexBuffer::Create(squareIndices, sizeof(squareIndices)));
-    squareVA->SetIndexBuffer(squareIB);
+    squareIB.reset(Lypo::IndexBuffer::create(squareIndices, sizeof(squareIndices)));
+    squareVA->setIndexBuffer(squareIB);
 
 
     /* Loop until the user closes the window */
@@ -106,14 +106,14 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(blueShader);
-        squareVA->Bind();
-        glDrawElements(GL_TRIANGLES, squareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+        squareVA->bind();
+        glDrawElements(GL_TRIANGLES, squareVA->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
 
 
 
         glUseProgram(shaderProgram);
-        vertexArray->Bind();
-        glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+        vertexArray->bind();
+        glDrawElements(GL_TRIANGLES, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
 
 
 

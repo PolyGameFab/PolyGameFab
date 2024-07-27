@@ -9,7 +9,7 @@ namespace Lypo {
             None = 0, Float, Float2, Float3, Float4, Mat3, Mat4, Int, Int2, Int3, Int4, Bool
         };
 
-        static uint32_t ShaderDataTypeSize(ShaderDataType type)
+        static uint32_t shaderDataTypeSize(ShaderDataType type)
         {
             switch (type)
             {
@@ -41,11 +41,11 @@ namespace Lypo {
             BufferElement() {}
 
             BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
-                    : Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
+                    : Name(name), Type(type), Size(shaderDataTypeSize(type)), Offset(0), Normalized(normalized)
             {
             }
 
-            uint32_t GetComponentCount() const
+            uint32_t getComponentCount() const
             {
                 switch (Type)
                 {
@@ -75,18 +75,18 @@ namespace Lypo {
             BufferLayout(const std::initializer_list<BufferElement>& elements)
                     : elements_(elements)
             {
-                CalculateOffsetsAndStride();
+                calculateOffsetsAndStride();
             }
 
-            inline uint32_t GetStride() const { return stride_; }
-            inline const std::vector<BufferElement>& GetElements() const { return elements_; }
+            inline uint32_t getStride() const { return stride_; }
+            inline const std::vector<BufferElement>& getElements() const { return elements_; }
 
             std::vector<BufferElement>::iterator begin() { return elements_.begin(); }
             std::vector<BufferElement>::iterator end() { return elements_.end(); }
             std::vector<BufferElement>::const_iterator begin() const { return elements_.begin(); }
             std::vector<BufferElement>::const_iterator end() const { return elements_.end(); }
         private:
-            void CalculateOffsetsAndStride()
+            void calculateOffsetsAndStride()
             {
                 uint32_t offset = 0;
                 stride_ = 0;

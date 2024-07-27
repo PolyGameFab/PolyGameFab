@@ -6,8 +6,8 @@
 
 namespace Lypo {
 
-    VertexArray *VertexArray::Create() {
-        switch (Renderer::GetAPI()) {
+    VertexArray *VertexArray::create() {
+        switch (Renderer::getApi()) {
             case RendererAPI::None:    /*TODO: Log error: None is not supported*/ return nullptr;
             case RendererAPI::OpenGL:
                 return new OpenGLVertexArray();

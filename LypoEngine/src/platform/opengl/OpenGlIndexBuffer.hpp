@@ -9,11 +9,11 @@ namespace Lypo {
 
         ~OpenGlIndexBuffer();
 
-        void Bind() const override;
+        void bind() const override;
 
-        void Unbind() const override;
+        void unbind() const override;
 
-        virtual uint32_t GetCount() const { return count_; }
+        virtual uint32_t getCount() const { return count_; }
 
     private:
         uint32_t bufferID_;
