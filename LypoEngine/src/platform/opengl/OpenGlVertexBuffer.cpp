@@ -5,17 +5,17 @@
 namespace Lypo {
 
     OpenGlVertexBuffer::OpenGlVertexBuffer(float *vertices, uint32_t size) {
-        glGenBuffers(1, &_BufferID);
-        glBindBuffer(GL_ARRAY_BUFFER, _BufferID);
+        glGenBuffers(1, &bufferID_);
+        glBindBuffer(GL_ARRAY_BUFFER, bufferID_);
         glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
     }
 
     OpenGlVertexBuffer::~OpenGlVertexBuffer() {
-        glDeleteBuffers(1, &_BufferID);
+        glDeleteBuffers(1, &bufferID_);
     }
     
     void OpenGlVertexBuffer::Bind() const {
-        glBindBuffer(GL_ARRAY_BUFFER, _BufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, bufferID_);
     }
 
     void OpenGlVertexBuffer::Unbind() const {

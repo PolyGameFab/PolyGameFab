@@ -13,10 +13,10 @@ namespace Lypo {
 
         void Unbind() const override;
 
-        virtual uint32_t GetCount() const { return _Count; }
+        virtual uint32_t GetCount() const { return count_; }
 
     private:
-        uint32_t _BufferID;
-        uint32_t _Count;
+        uint32_t bufferID_;
+        uint32_t count_;
     };
 }

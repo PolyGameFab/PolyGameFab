@@ -2,7 +2,7 @@
 
 namespace Lypo {
 
-	RendererAPI Renderer::rendererAPI = RendererAPI::OpenGL;
+	RendererAPI Renderer::rendererAPI_ = RendererAPI::OpenGL;
 
 
 }

@@ -73,32 +73,32 @@ namespace Lypo {
             BufferLayout() {}
 
             BufferLayout(const std::initializer_list<BufferElement>& elements)
-                    : elements(elements)
+                    : elements_(elements)
             {
                 CalculateOffsetsAndStride();
             }
 
-            inline uint32_t GetStride() const { return stride; }
-            inline const std::vector<BufferElement>& GetElements() const { return elements; }
+            inline uint32_t GetStride() const { return stride_; }
+            inline const std::vector<BufferElement>& GetElements() const { return elements_; }
 
-            std::vector<BufferElement>::iterator begin() { return elements.begin(); }
-            std::vector<BufferElement>::iterator end() { return elements.end(); }
-            std::vector<BufferElement>::const_iterator begin() const { return elements.begin(); }
-            std::vector<BufferElement>::const_iterator end() const { return elements.end(); }
+            std::vector<BufferElement>::iterator begin() { return elements_.begin(); }
+            std::vector<BufferElement>::iterator end() { return elements_.end(); }
+            std::vector<BufferElement>::const_iterator begin() const { return elements_.begin(); }
+            std::vector<BufferElement>::const_iterator end() const { return elements_.end(); }
         private:
             void CalculateOffsetsAndStride()
             {
                 uint32_t offset = 0;
-                stride = 0;
-                for (auto& element : elements)
+                stride_ = 0;
+                for (auto& element : elements_)
                 {
                     element.Offset = offset;
                     offset += element.Size;
-                    stride += element.Size;
+                    stride_ += element.Size;
                 }
             }
         private:
-            std::vector<BufferElement> elements;
-            uint32_t stride = 0;
+            std::vector<BufferElement> elements_;
+            uint32_t stride_ = 0;
         };
 }

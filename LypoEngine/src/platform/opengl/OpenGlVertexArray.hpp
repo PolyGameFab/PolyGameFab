@@ -19,12 +19,12 @@ namespace Lypo {
         virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) override;
         virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) override;
 
-        virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffers() const { return _VertexBuffers; }
-        virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const { return _IndexBuffer; }
+        virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffers() const { return vertexBuffers_; }
+        virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const { return indexBuffer_; }
     private:
         uint32_t _RendererID;
-        std::vector<std::shared_ptr<VertexBuffer>> _VertexBuffers;
-        std::shared_ptr<IndexBuffer> _IndexBuffer;
+        std::vector<std::shared_ptr<VertexBuffer>> vertexBuffers_;
+        std::shared_ptr<IndexBuffer> indexBuffer_;
     };
 
 }
