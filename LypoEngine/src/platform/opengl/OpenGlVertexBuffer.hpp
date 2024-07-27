@@ -13,12 +13,12 @@ namespace Lypo {
         virtual void Bind() const override;
         virtual void Unbind() const override;
 
-        virtual const BufferLayout& GetLayout() const override { return _Layout; }
-        virtual void SetLayout(const BufferLayout& layout) override { _Layout = layout; }
+        virtual const BufferLayout& GetLayout() const override { return layout_; }
+        virtual void SetLayout(const BufferLayout& layout) override { layout_ = layout; }
 
     private:
-        uint32_t _BufferID;
-        BufferLayout _Layout;
+        uint32_t bufferID_;
+        BufferLayout layout_;
     };
 
 }
