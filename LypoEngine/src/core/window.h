@@ -42,7 +42,7 @@ namespace core
        /**
         * @brief Default destructor
         */
-       virtual ~Window() = default;
+       virtual ~Window() noexcept = default;
        
        /**
         * @brief Update the state of the window

@@ -41,13 +41,13 @@ namespace platform
             GLFWmonitor* monitor_ = nullptr;
             const GLFWvidmode* mode_ = nullptr;
             
-            struct WindowsData
+            struct WindowData
             {
                 std::string title;
                 uint32_t width, height;
                 bool vSync;
             };
 
-            WindowsData data_;
+            WindowData data_;
         };
 }
