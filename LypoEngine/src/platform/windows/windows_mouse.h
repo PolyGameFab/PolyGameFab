@@ -12,6 +12,9 @@
 
 namespace platform
 {
+	/**
+	 * Windows concrete class of core::Mouse
+	 */
 	class WindowsMouse : public core::Mouse
 	{
 	public:

@@ -12,6 +12,9 @@
 
 namespace platform
 {
+	/**
+	 * @brief Linux concrete class of core::Mouse
+	 */
 	class LinuxMouse : public core::Mouse
 	{
 	public:

@@ -35,7 +35,7 @@ namespace platform
 
 	void LinuxMouse::buttonCallback(GLFWwindow* window, int button_value, int action, int mods) noexcept
 	{
-		if (button_value >= static_cast<int>(core::ButtonValue::BUTTON_1) && button_value < static_cast<int>(core::ButtonValue::BUTTON_8)) WindowsMouse::data_.buttons[button_value] = (action == GLFW_PRESS);
+		if (button_value >= static_cast<int>(core::ButtonValue::BUTTON_1) && button_value < static_cast<int>(core::ButtonValue::BUTTON_8)) LinuxMouse::data_.buttons[button_value] = (action == GLFW_PRESS);
 	}
 
 	void LinuxMouse::setSensitivity(const float& sensitivity)
