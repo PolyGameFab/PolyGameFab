@@ -14,7 +14,6 @@ int main(void)
     platform::WindowsWindow window = platform::WindowsWindow("Windows Window", 600, 700, core::WindowFlags::DEFAULT);
     platform::WindowsMouse mouse = platform::WindowsMouse(window.getNativeWindow());
 
-    
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(reinterpret_cast<GLFWwindow*>(window.getNativeWindow())))
     {
@@ -29,7 +28,6 @@ int main(void)
         {
             std::cout << " Right mouse button pressed" << std::endl;
         }
-
         window.onUpdate();
     }
     return 0;

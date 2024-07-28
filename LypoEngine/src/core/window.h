@@ -43,7 +43,6 @@ namespace core
         * @brief Default destructor
         */
        virtual ~Window() noexcept = default;
-       
        /**
         * @brief Updates the state of the window
         */
@@ -61,7 +60,6 @@ namespace core
        
        /**
         * @brief Checks if VSync is enabled or disabled for the window
-        */
        virtual bool isVSync() const = 0;
 
        /**
