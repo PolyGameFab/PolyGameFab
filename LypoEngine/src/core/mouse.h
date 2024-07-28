@@ -37,9 +37,6 @@ namespace core
 		virtual void setConfiguration(const core::MouseConfigurations& configuration) = 0;
 		virtual void getPosition(double& x_position, double& y_position) = 0;
 
-		virtual double getXPosition() const = 0;
-		virtual double getYPosition() const = 0;
-
 		virtual bool isButtonPressed(const core::ButtonValue& button_value) const = 0;
 	};
 }

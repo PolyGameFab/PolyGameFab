@@ -65,16 +65,6 @@ namespace platform
 		y_position = WindowsMouse::data_.y_position;
 	}
 
-	double WindowsMouse::getXPosition() const
-	{
-		return WindowsMouse::data_.x_position;
-	}
-
-	double WindowsMouse::getYPosition() const
-	{
-		return WindowsMouse::data_.y_position;
-	}
-
 	bool WindowsMouse::isButtonPressed(const core::ButtonValue& button_value) const
 	{
 		return WindowsMouse::data_.buttons[static_cast<int>(button_value)];

@@ -23,9 +23,6 @@ namespace platform
 		
 		void getPosition(double& x_position, double& y_position) override;
 
-		double getXPosition() const override;
-		double getYPosition() const override;
-
 		bool isButtonPressed(const core::ButtonValue& value) const override;
 	private:
 		void initialize(void* window, const core::MouseConfigurations& configuration) noexcept;
