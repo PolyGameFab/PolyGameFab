@@ -60,6 +60,7 @@ namespace core
        
        /**
         * @brief Checks if VSync is enabled or disabled for the window
+        */
        virtual bool isVSync() const = 0;
 
        /**
