@@ -11,27 +11,27 @@ namespace core
     /**
      * @brief Flags for window creation
      */
-    typedef enum class WindowFlags
+    enum class WindowFlags
     {
         DEFAULT,
         WINDOWED_FULLSCREEN,
         FULLSCREEN
-    } WFlags;
+    };
 
     /**
      * @brief Properties for window creation
      */
-    typedef struct WindowProperties 
+    struct WindowProperties 
     {
-        std::string title_;
-        uint32_t width_, height_;
-        WFlags flag_;
+        std::string title;
+        uint32_t width, height;
+        WindowFlags flag;
 
         inline WindowProperties() noexcept : WindowProperties("", 0, 0, WindowFlags::DEFAULT) {}
         inline WindowProperties(const std::string& title, const uint32_t& width, 
                                 const uint32_t& height, const WindowFlags& flag) noexcept 
-                            : title_(title), width_(width), height_(height), flag_(flag) {}
-    } WindowProps;
+                            : title(title), width(width), height(height), flag(flag) {}
+    };
 
     /**
      * @brief API to make the creation of an OpenGL Window easier
@@ -42,31 +42,31 @@ namespace core
        /**
         * @brief Default destructor
         */
-       inline virtual ~Window() = default;
+       virtual ~Window() = default;
        
        /**
         * @brief Update the state of the window
         */
-       inline virtual void onUpdate() = 0;
+       virtual void onUpdate() = 0;
 
-       inline virtual uint32_t getWidth() const = 0;
-       inline virtual uint32_t getHeight() const = 0;
+       virtual uint32_t getWidth() const = 0;
+       virtual uint32_t getHeight() const = 0;
        
        /**
         * @brief Set whether VSync is enabled or disabled
         * 
         * @param enabled(bool) Enable or disable VSync
         */
-       inline virtual void setVSync(bool enabled) = 0;
+       virtual void setVSync(bool enabled) = 0;
        
        /**
         * @brief Check if VSync is enabled or disabled for the window
         */
-       inline virtual bool isVSync() const = 0;
+       virtual bool isVSync() const = 0;
 
        /**
         * @brief Get the implemented platform window
         */
-       inline virtual void* getNativeWindow() const = 0;
+       virtual void* getNativeWindow() const = 0;
     };
 }

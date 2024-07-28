@@ -32,22 +32,22 @@ namespace platform
             void setVSync(bool enabled) override;
             bool isVSync() const override; 
 
-            virtual void* getNativeWindow() const;
+            void* getNativeWindow() const;
         private:
-            virtual void initialize(const core::WindowProperties& properties) noexcept;
-            virtual void shutdown() noexcept;
+            void initialize(const core::WindowProperties& properties) noexcept;
+            void shutdown() noexcept;
         private:
             GLFWwindow* window_ = nullptr;
             GLFWmonitor* monitor_ = nullptr;
             const GLFWvidmode* mode_ = nullptr;
             
-            typedef struct WindowsData
+            struct WindowsData
             {
-                std::string title_;
-                uint32_t width_, height_;
-                bool vSync_;
-            } data;
+                std::string title;
+                uint32_t width, height;
+                bool vSync;
+            };
 
-            data data_;
+            WindowsData data_;
         };
 }
