@@ -10,9 +10,8 @@ namespace Lypo {
 		{
             case RendererAPI::None:   /*TODO Log ERROR RendererAPI::None is not supported */ return nullptr;
             case RendererAPI::OpenGL:  return new OpenGlVertexBuffer(vertices, size);
+			default:	/*TODO Log ERROR:  This API is not supported */
+				return nullptr;
 		}
-
-		/*TODO Log ERROR:  This API is not supported */
-		return nullptr;
 	}
 }
