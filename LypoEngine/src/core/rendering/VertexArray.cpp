@@ -11,10 +11,8 @@ namespace Lypo {
             case RendererAPI::None:    /*TODO: Log error: None is not supported*/ return nullptr;
             case RendererAPI::OpenGL:
                 return new OpenGLVertexArray();
+            default:	/*TODO Log ERROR:  This API is not supported */
+                return nullptr;
         }
-
-        /*TODO: Log error: API is not supported*/
-        return nullptr;
     }
-
 }

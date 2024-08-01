@@ -59,8 +59,7 @@ int main(void)
             0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
     };
 
-    std::shared_ptr<Lypo::VertexBuffer> vertexBuffer;
-    vertexBuffer.reset(Lypo::VertexBuffer::create(vertices, sizeof(vertices)));
+    std::shared_ptr<Lypo::VertexBuffer> vertexBuffer = std::shared_ptr<Lypo::VertexBuffer>(Lypo::VertexBuffer::create(vertices, sizeof(vertices)));
     Lypo::BufferLayout layout = {
             { Lypo::ShaderDataType::Float3, "a_Position" },
             { Lypo::ShaderDataType::Float4, "a_Color" }
@@ -83,8 +82,7 @@ int main(void)
             -0.75f,  0.75f, 0.0f
     };
 
-    std::shared_ptr<Lypo::VertexBuffer> squareVB;
-    squareVB.reset(Lypo::VertexBuffer::create(squareVertices, sizeof(squareVertices)));
+    std::shared_ptr<Lypo::VertexBuffer> squareVB = std::shared_ptr<Lypo::VertexBuffer>(Lypo::VertexBuffer::create(squareVertices, sizeof(squareVertices)));
     squareVB->setLayout({
                                 {Lypo::ShaderDataType::Float3, "a_Position"}
                         });
@@ -114,10 +112,6 @@ int main(void)
         glUseProgram(shaderProgram);
         vertexArray->bind();
         glDrawElements(GL_TRIANGLES, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
-
-
-
-
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
