@@ -6,15 +6,45 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+#include "../../core/events/event_bus.h"
 #include "windows_window.h"
 #include "platform/opengl/opengl_shader.h"
-
 
 int main(void)
 {
     platform::WindowsWindow window = platform::WindowsWindow("Windows Window", 600, 700, core::WindowFlags::DEFAULT);
     Lypo::Shader *shader = new Lypo::OpenglShader("vertex.glsl", "fragment.glsl");
 
+    auto& bus = Lypo::EventBus::getInstance();
+
+    auto eventHandler1 = new Lypo::RealNode(1);
+
+    auto eventHandler1_1 = new Lypo::RealNode(11);
+    auto eventHandler1_2 = new Lypo::RealNode(12);
+    auto eventHandler1_3 = new Lypo::RealNode(13);
+
+    auto eventHandler1_1_1 = new Lypo::RealNode(111);
+    auto eventHandler1_1_2 = new Lypo::RealNode(112);
+
+    auto eventHandler1_2_1 = new Lypo::RealNode(121);
+    auto eventHandler1_2_2 = new Lypo::RealNode(122);
+
+
+    eventHandler1_1->addChild(eventHandler1_1_1);
+    eventHandler1_1->addChild(eventHandler1_1_2);
+
+    eventHandler1_1->addChild(eventHandler1_2_1);
+    eventHandler1_1->addChild(eventHandler1_2_2);
+
+    bus.addEventListener(eventHandler1);
+
+    eventHandler1->addChild(eventHandler1_1);
+    eventHandler1->addChild(eventHandler1_2);
+    eventHandler1->addChild(eventHandler1_3);
+
+    /* Initialize the library */
+    if (!glfwInit())
+        return -1;
     float vertices[] = {
         -0.5f, -0.5f, 0.0f, // left
         0.5f, -0.5f, 0.0f, // right
@@ -26,6 +56,14 @@ int main(void)
     glGenBuffers(1, &VBO);
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
     glBindVertexArray(VAO);
+    /* Make the window's context current */
+    // glfwMakeContextCurrent(window);
+
+    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
+    {
+        std::cout << "Error in glad load" << std::endl;
+        return -1;
+    }
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -39,6 +77,9 @@ int main(void)
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
+
+
+  
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(reinterpret_cast<GLFWwindow *>(window.getNativeWindow())))
     {
@@ -54,6 +95,9 @@ int main(void)
 
         /* Poll for and process events */
         window.onUpdate();
+      
+        /* Simple test to query if a specific key is pressed */
+        // std::cout << im.isKeyPressed(68) << std::endl;
     }
 
     glfwTerminate();

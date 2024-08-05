@@ -3,6 +3,8 @@
 //
 #include "linux_window.h"
 
+#include "platform/glfw/inputs/glfw_input_manager.h"
+
 namespace platform
 {
         LinuxWindow::LinuxWindow(const std::string& title, const uint32_t& width, const uint32_t& height, const core::WindowFlags& flag) noexcept : LinuxWindow(core::WindowProperties(title, width, height, flag)) {}
@@ -53,6 +55,11 @@ namespace platform
                 std::cout << "Error in glad load" << std::endl;
                 return;
             }
+
+            /* Creates InputManager */
+            auto im = Lypo::GlfwInputManager(window_);
+            /* Set the key callback */
+            glfwSetKeyCallback(window_, im.key_callback);
 
             glfwSetWindowUserPointer(window_, &data_);
             setVSync(true);
