@@ -4,6 +4,7 @@
 #pragma once
 
 #include "core/window.h"
+#include "core/console_log.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -34,20 +35,9 @@ namespace platform
 
             void* getNativeWindow() const;
         private:
-            void initialize(const core::WindowProperties& properties) noexcept;
+            void initialize() noexcept;
             void shutdown() noexcept;
         private:
-            GLFWwindow* window_ = nullptr;
-            GLFWmonitor* monitor_ = nullptr;
-            const GLFWvidmode* mode_ = nullptr;
-            
-            struct WindowData
-            {
-                std::string title;
-                uint32_t width, height;
-                bool vSync;
-            };
-
-            WindowData data_;
+            std::unique_ptr<DataImpl> p_data_impl_ = nullptr;
         };
 }

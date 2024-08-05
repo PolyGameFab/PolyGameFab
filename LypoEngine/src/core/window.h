@@ -5,6 +5,7 @@
 
 #include <string>
 #include <cstdint>
+#include <memory>
 
 namespace core 
 {
@@ -67,5 +68,17 @@ namespace core
         * @brief Gets the implemented platform window
         */
        virtual void* getNativeWindow() const = 0;
+
+       /**
+        * 
+        */
+       static std::unique_ptr<Window> create(const WindowProperties& props) noexcept;
+       
+       /**
+        * 
+        */
+       static std::unique_ptr<Window> create(const std::string& title, const uint32_t& width, const uint32_t& height, const WindowFlags& flag = WindowFlags::DEFAULT) noexcept;
+    protected:
+        struct DataImpl; 
     };
 }
