@@ -15,6 +15,8 @@ include_directories(LypoEngine/dep/glad/include)
 
 file(GLOB_RECURSE CORE_SOURCES LypoEngine/src/core/*cpp LypoEngine/src/core/*.h)
 
+file(GLOB_RECURSE VENDOR_SOURCES LypoEngine/vendor/*cpp LypoEngine/vendor/*.h)
+
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     file(GLOB_RECURSE PLATFORM_SOURCES LypoEngine/src/platform/windows/*.cpp LypoEngine/src/platform/windows/*.h)
@@ -31,6 +33,6 @@ else()
     message(FATAL_ERROR "Unsupported platform: ${CMAKE_SYSTEM_NAME}")
 endif ()
 
-add_executable(lypo_engine ${CORE_SOURCES} ${PLATFORM_SOURCES} ${RENDERING_SOURCES})
+add_executable(lypo_engine ${CORE_SOURCES} ${PLATFORM_SOURCES} ${RENDERING_SOURCES} ${VENDOR_SOURCES})
 
 target_link_libraries(lypo_engine glfw glad)
