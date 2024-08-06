@@ -2,7 +2,6 @@
 // Created by GuillaumeIsCoding on 8/05/2024
 //
 #include "core/window.h"
-#include "core/console_log.h"
 
 #ifdef LYPO_PLATFORM_WINDOWS
 #include "platform/windows/windows_window.h"
