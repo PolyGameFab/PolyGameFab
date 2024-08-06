@@ -4,7 +4,6 @@
 #pragma once
 
 #include "core/window.h"
-#include "core/console_log.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

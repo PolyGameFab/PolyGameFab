@@ -34,18 +34,6 @@ namespace platform
 		static void scrollCallback(GLFWwindow* window, double x_offset, double y_offset) noexcept;
 		static void buttonCallback(GLFWwindow* window, int button, int action, int mods) noexcept;
 	private:
-		struct MouseData
-		{
-			double x_position, y_position;
-			double x_offset, y_offset;
-			double sensitivity;
-			bool buttons[8] = { false };
-
-			MouseData() : x_position(0.0), y_position(0.0), x_offset(0.0), y_offset(0.0), sensitivity(1.0f) {}
-		};
-
-		GLFWwindow* window_ = nullptr;
-
-		inline static MouseData data_ = LinuxMouse::MouseData();
+		static std::unique_ptr<DataImpl> p_data_impl_;
 	};
 }

@@ -3,6 +3,10 @@
 //
 #pragma once
 
+#include <memory>
+
+#include "core/console_log.h"
+
 namespace core
 {
 	/**
@@ -75,5 +79,12 @@ namespace core
 		 * @return false If the button is not pressed
 		 */
 		virtual bool isButtonPressed(const core::ButtonValue& button_value) const = 0;
+
+		/**
+		 * 
+		 */
+		static std::unique_ptr<Mouse> create(void* window, const MouseConfigurations& configuration = core::MouseConfigurations::DEFAULT);
+	protected:
+		struct DataImpl; 
 	};
 }
