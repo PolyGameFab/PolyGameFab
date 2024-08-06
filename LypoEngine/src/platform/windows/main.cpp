@@ -16,14 +16,11 @@ unsigned int createBlueShader();
 
 int main(void)
 {
-    platform::WindowsWindow window = platform::WindowsWindow("Windows Window", 600, 700, core::WindowFlags::DEFAULT);
-    Lypo::Shader *shader = new Lypo::OpenglShader("vertex.glsl", "fragment.glsl");
+    GLFWwindow* window;
 
-    float vertices[] = {
-        -0.5f, -0.5f, 0.0f, // left
-        0.5f, -0.5f, 0.0f, // right
-        0.0f, 0.5f, 0.0f // top
-    };
+    /* Initialize the library */
+    if (!glfwInit())
+        return -1;
 
     /* create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
@@ -33,11 +30,9 @@ int main(void)
         return -1;
     }
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
-    glEnableVertexAttribArray(0);
+    /* Make the window's context current */
+    glfwMakeContextCurrent(window);
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
     {
@@ -64,8 +59,7 @@ int main(void)
             0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
     };
 
-    std::shared_ptr<Lypo::VertexBuffer> vertexBuffer;
-    vertexBuffer.reset(Lypo::VertexBuffer::create(vertices, sizeof(vertices)));
+    std::shared_ptr<Lypo::VertexBuffer> vertexBuffer = std::shared_ptr<Lypo::VertexBuffer>(Lypo::VertexBuffer::create(vertices, sizeof(vertices)));
     Lypo::BufferLayout layout = {
             { Lypo::ShaderDataType::Float3, "a_Position" },
             { Lypo::ShaderDataType::Float4, "a_Color" }
@@ -88,8 +82,7 @@ int main(void)
             -0.75f,  0.75f, 0.0f
     };
 
-    std::shared_ptr<Lypo::VertexBuffer> squareVB;
-    squareVB.reset(Lypo::VertexBuffer::create(squareVertices, sizeof(squareVertices)));
+    std::shared_ptr<Lypo::VertexBuffer> squareVB = std::shared_ptr<Lypo::VertexBuffer>(Lypo::VertexBuffer::create(squareVertices, sizeof(squareVertices)));
     squareVB->setLayout({
                                 {Lypo::ShaderDataType::Float3, "a_Position"}
                         });
@@ -119,10 +112,6 @@ int main(void)
         glUseProgram(shaderProgram);
         vertexArray->bind();
         glDrawElements(GL_TRIANGLES, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
-
-
-
-
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

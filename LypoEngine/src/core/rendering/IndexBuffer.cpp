@@ -8,11 +8,11 @@ namespace Lypo {
     {
         switch (Renderer::getApi())
         {
-            case RendererAPI::None:   /*TODO Log ERROR RendererAPI::None is not supported */ return nullptr;
+            case RendererAPI::None:   LYPO_CORE_ERROR("RendererAPI::None is not supported") return nullptr;
             case RendererAPI::OpenGL:  return new OpenGlIndexBuffer(indices, count);
         }
 
-        /*TODO Log ERROR:  This API is not supported */
+        LYPO_CORE_ERROR("This API is not supported");
         return nullptr;
     }
 }

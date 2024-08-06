@@ -5,3 +5,4 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include "core/console_log.h"
