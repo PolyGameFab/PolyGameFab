@@ -4,31 +4,31 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "windows_window.h"
-#include "windows_mouse.h"
+#include "core/window.h"
+#include "core/mouse.h"
 
 #include <iostream>
 
 int main(void)
 {
-    platform::WindowsWindow window = platform::WindowsWindow("Windows Window", 600, 700, core::WindowFlags::DEFAULT);
-    platform::WindowsMouse mouse = platform::WindowsMouse(window.getNativeWindow());
+    auto window = core::Window::create("Windows Window", 600, 700, core::WindowFlags::DEFAULT);
+    auto mouse = core::Mouse::create(window->getNativeWindow());
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(reinterpret_cast<GLFWwindow*>(window.getNativeWindow())))
+    while (!glfwWindowShouldClose(reinterpret_cast<GLFWwindow*>(window->getNativeWindow())))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
         /* Poll for and process events */
         double xpos, ypos;
-        mouse.getPosition(xpos, ypos);
+        mouse->getPosition(xpos, ypos);
         std::cout << "Mouse Position (" << xpos << ", " << ypos << ")" << std::endl;
 
-        if (mouse.isButtonPressed(core::ButtonValue::BUTTON_RIGHT))
+        if (mouse->isButtonPressed(core::ButtonValue::BUTTON_RIGHT))
         {
             std::cout << " Right mouse button pressed" << std::endl;
         }
-        window.onUpdate();
+        window->onUpdate();
     }
     return 0;
 }

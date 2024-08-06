@@ -7,6 +7,8 @@
 #include <cstdint>
 #include <memory>
 
+#include "core/console_log.h"
+
 namespace core 
 {
     /**
