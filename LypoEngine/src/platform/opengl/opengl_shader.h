@@ -20,6 +20,10 @@ namespace Lypo
 
         void unbind() const override;
 
+        void uploadUniformInt(const std::string& name, int value);
+
+        void uploadUniformFloat(const std::string& name, float value);
+
     private:
         unsigned int program_id = 0;
     };

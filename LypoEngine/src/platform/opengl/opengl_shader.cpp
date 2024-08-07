@@ -127,4 +127,16 @@ namespace Lypo
         glUseProgram(0);
     }
 
+    void OpenglShader::uploadUniformInt(const std::string& name, int value)
+    {
+        GLint location = glGetUniformLocation(program_id, name.c_str());
+        glUniform1i(location, value);
+    }
+
+    void OpenglShader::uploadUniformFloat(const std::string& name, float value)
+    {
+        GLint location = glGetUniformLocation(program_id, name.c_str());
+        glUniform1f(location, value);
+    }
+
 }

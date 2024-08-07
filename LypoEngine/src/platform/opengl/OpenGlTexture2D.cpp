@@ -2,7 +2,7 @@
 // Created by mathe on 05/08/2024.
 //
 
-#include "OpenGLTexture2D.h"
+#include "OpenGlTexture2D.h"
 
 #include <glad/glad.h>
 
@@ -13,7 +13,7 @@
 
 
 namespace Lypo{
-    OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
+    OpenGlTexture2D::OpenGlTexture2D(const std::string& path)
             : path_(path)
     {
         int width, height, channels;
@@ -47,12 +47,12 @@ namespace Lypo{
         stbi_image_free(data);
     }
 
-    OpenGLTexture2D::~OpenGLTexture2D()
+    OpenGlTexture2D::~OpenGlTexture2D()
     {
         glDeleteTextures(1, &rendererID_);
     }
 
-    void OpenGLTexture2D::bind(uint32_t slot) const
+    void OpenGlTexture2D::bind(uint32_t slot) const
     {
         glBindTextureUnit(slot, rendererID_);
     }

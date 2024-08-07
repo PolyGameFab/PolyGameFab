@@ -1,7 +1,7 @@
 #include "Texture.h"
 
 #include "Renderer.hpp"
-#include "platform/opengl/OpenGLTexture2D.h"
+#include "platform/opengl/OpenGlTexture2D.h"
 
 
 namespace Lypo {
@@ -11,7 +11,7 @@ namespace Lypo {
         switch (Renderer::getApi())
         {
             case RendererAPI::None:    LYPO_CORE_ERROR("RendererAPI::None is not supported") return nullptr;
-            case RendererAPI::OpenGL:  return std::make_shared<OpenGLTexture2D>(path);
+            case RendererAPI::OpenGL:  return std::make_shared<OpenGlTexture2D>(path);
         }
 
         LYPO_CORE_ERROR("This API is not supported");

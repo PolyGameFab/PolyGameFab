@@ -10,6 +10,8 @@
 #include "core/rendering/VertexArray.hpp"
 #include "core/rendering/BufferUtils.h"
 #include "core/rendering/Texture.h"
+#include "core/rendering/shader.h"
+#include "platform/opengl/opengl_shader.h"
 #include "platform/opengl/GLCheck.h"
 
 unsigned int createBasicShader();
@@ -46,10 +48,19 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    unsigned int shaderProgram = createBasicShader();
-    unsigned int textureShader = createTextureShader();
+/*    unsigned int shaderProgram = createBasicShader();
+    unsigned int textureShader = createTextureShader();*/
 
 
+    std::string fragmentPath = "../LypoEngine/assets/shaders/basicColorShader.frag.glsl";
+    std::string vertexPath = "../LypoEngine/assets/shaders/basicColorShader.vert.glsl";
+
+    std::shared_ptr<Lypo::OpenglShader> colorShader = std::make_shared<Lypo::OpenglShader>(vertexPath, fragmentPath);
+
+    fragmentPath = "../LypoEngine/assets/shaders/textureShader.frag.glsl";
+    vertexPath = "../LypoEngine/assets/shaders/textureShader.vert.glsl";
+
+    std::shared_ptr<Lypo::OpenglShader> textureShader = std::make_shared<Lypo::OpenglShader>(vertexPath, fragmentPath);
 
     std::shared_ptr<Lypo::VertexArray> vertexArray;
     std::shared_ptr<Lypo::VertexArray> squareVA;
@@ -99,10 +110,8 @@ int main(void)
 
     std::shared_ptr<Lypo::Texture2D> m_Texture = Lypo::Texture2D::Create("../LypoEngine/assets/textures/Checkerboard.png");
 
-    std::string name = "u_Texture";
-    glUseProgram(textureShader);
-    GLint location = glGetUniformLocation(textureShader, name.c_str());
-    glUniform1i(location, 0);
+    textureShader->bind();
+    textureShader->uploadUniformInt("u_Texture", 0);
 
 
     /* Loop until the user closes the window */
@@ -116,12 +125,12 @@ int main(void)
 
 
         m_Texture->bind();
-        glUseProgram(textureShader);
+        textureShader->bind();
         squareVA->bind();
         glDrawElements(GL_TRIANGLES, squareVA->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
 
 
-        glUseProgram(shaderProgram);
+        colorShader->bind();
         vertexArray->bind();
         glDrawElements(GL_TRIANGLES, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
 

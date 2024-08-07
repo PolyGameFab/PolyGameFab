@@ -8,11 +8,11 @@
 
 namespace Lypo {
 
-    class OpenGLTexture2D : public Texture2D
+    class OpenGlTexture2D : public Texture2D
     {
     public:
-        OpenGLTexture2D(const std::string& path);
-        virtual ~OpenGLTexture2D();
+        OpenGlTexture2D(const std::string& path);
+        virtual ~OpenGlTexture2D();
 
         virtual uint32_t getWidth() const override { return width_;  }
         virtual uint32_t getHeight() const override { return height_; }
