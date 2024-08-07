@@ -12,6 +12,9 @@ include_directories(LypoEngine/dep/glfw/include)
 add_subdirectory(LypoEngine/dep/glad)
 include_directories(LypoEngine/dep/glad/include)
 
+include_directories(LypoEngine/dep/std_image)
+
+
 
 file(GLOB_RECURSE CORE_SOURCES LypoEngine/src/core/*cpp LypoEngine/src/core/*.h)
 

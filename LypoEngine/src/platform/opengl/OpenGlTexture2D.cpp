@@ -6,7 +6,7 @@
 
 #include <glad/glad.h>
 
-#include "../vendor/stb_image.h"
+#include "stb_image.h"
 
 #include <iostream>
 #include <filesystem>
