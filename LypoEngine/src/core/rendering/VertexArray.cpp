@@ -2,7 +2,7 @@
 
 #include "VertexArray.hpp"
 #include "Renderer.hpp"
-#include "platform/opengl/OpenGLVertexArray.hpp"
+#include "platform/opengl/OpenGlVertexArray.hpp"
 
 namespace Lypo {
 

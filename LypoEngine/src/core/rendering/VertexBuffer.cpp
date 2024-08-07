@@ -1,7 +1,7 @@
 
 #include "Renderer.hpp"
 #include "VertexBuffer.hpp"
-#include "platform/opengl/OpenGLVertexBuffer.hpp"
+#include "platform/opengl/OpenGlVertexBuffer.hpp"
 
 namespace Lypo {
 	VertexBuffer* VertexBuffer::create(float* vertices, uint32_t size)
