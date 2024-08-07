@@ -8,6 +8,9 @@
 
 #include "../vendor/stb_image.h"
 
+#include <iostream>
+#include <filesystem>
+
 
 namespace Lypo{
     OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
@@ -16,9 +19,20 @@ namespace Lypo{
         int width, height, channels;
         stbi_set_flip_vertically_on_load(1);
         stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+
+
+        std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
+
+
         if(!data){
             LYPO_CORE_ERROR("Failed to load image!");
+        }else{
+           std::cout << "Loaded image: " << path << std::endl;
+           std::cout << "Width: " << width << std::endl;
+            std::cout << "Height: " << height << std::endl;
         }
+
+
         width_ = width;
         height_ = height;
 
@@ -38,7 +52,7 @@ namespace Lypo{
         glDeleteTextures(1, &rendererID_);
     }
 
-    void OpenGLTexture2D::Bind(uint32_t slot) const
+    void OpenGLTexture2D::bind(uint32_t slot) const
     {
         glBindTextureUnit(slot, rendererID_);
     }

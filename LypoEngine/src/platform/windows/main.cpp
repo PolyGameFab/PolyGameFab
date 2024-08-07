@@ -9,10 +9,11 @@
 #include "core/rendering/IndexBuffer.hpp"
 #include "core/rendering/VertexArray.hpp"
 #include "core/rendering/BufferUtils.h"
+#include "core/rendering/Texture.h"
 #include "platform/opengl/GLCheck.h"
 
 unsigned int createBasicShader();
-unsigned int createBlueShader();
+unsigned int createTextureShader();
 
 int main(void)
 {
@@ -46,7 +47,9 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     unsigned int shaderProgram = createBasicShader();
-    unsigned int blueShader = createBlueShader();
+    unsigned int textureShader = createTextureShader();
+
+
 
     std::shared_ptr<Lypo::VertexArray> vertexArray;
     std::shared_ptr<Lypo::VertexArray> squareVA;
@@ -75,16 +78,17 @@ int main(void)
 
     squareVA.reset(Lypo::VertexArray::create());
 
-    float squareVertices[3 * 4] = {
-            -0.75f, -0.75f, 0.0f,
-            0.75f, -0.75f, 0.0f,
-            0.75f,  0.75f, 0.0f,
-            -0.75f,  0.75f, 0.0f
+    float squareVertices[5 * 4] = {
+            -0.75f, -0.75f, 0.0f,  0.0f, 0.0f,
+            0.75f, -0.75f, 0.0f,  1.0f, 0.0f,
+            0.75f,  0.75f, 0.0f,  1.0f, 1.0f,
+            -0.75f,  0.75f, 0.0f, 0.0f, 1.0f
     };
 
     std::shared_ptr<Lypo::VertexBuffer> squareVB = std::shared_ptr<Lypo::VertexBuffer>(Lypo::VertexBuffer::create(squareVertices, sizeof(squareVertices)));
     squareVB->setLayout({
-                                {Lypo::ShaderDataType::Float3, "a_Position"}
+                                {Lypo::ShaderDataType::Float3, "a_Position"},
+                                { Lypo::ShaderDataType::Float2, "a_TexCoord" }
                         });
     squareVA->addVertexBuffer(squareVB);
 
@@ -92,6 +96,13 @@ int main(void)
     std::shared_ptr<Lypo::IndexBuffer> squareIB;
     squareIB.reset(Lypo::IndexBuffer::create(squareIndices, sizeof(squareIndices)));
     squareVA->setIndexBuffer(squareIB);
+
+    std::shared_ptr<Lypo::Texture2D> m_Texture = Lypo::Texture2D::Create("../LypoEngine/assets/textures/Checkerboard.png");
+
+    std::string name = "u_Texture";
+    glUseProgram(textureShader);
+    GLint location = glGetUniformLocation(textureShader, name.c_str());
+    glUniform1i(location, 0);
 
 
     /* Loop until the user closes the window */
@@ -103,10 +114,11 @@ int main(void)
         glClearColor(0.1f, 0.1f, 0.1f, 1);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glUseProgram(blueShader);
+
+        m_Texture->bind();
+        glUseProgram(textureShader);
         squareVA->bind();
         glDrawElements(GL_TRIANGLES, squareVA->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
-
 
 
         glUseProgram(shaderProgram);
@@ -185,19 +197,19 @@ unsigned int createBasicShader()
     return shaderProgram;
 }
 
-unsigned int createBlueShader()
+unsigned int createTextureShader()
 {
     // Shader creation for test
     const char *vertexShaderSource = R"(
 			#version 330 core
 
 			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
 
-			out vec3 v_Position;
-
+			out vec2 v_TexCoord;
 			void main()
 			{
-				v_Position = a_Position;
+				v_TexCoord = a_TexCoord;
 				gl_Position = vec4(a_Position, 1.0);
 			}
 		)";
@@ -208,16 +220,16 @@ unsigned int createBlueShader()
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);
 
-    const char *fragmentShaderSource = R"(
+    const char *fragmentShaderSource =  R"(
 			#version 330 core
 
 			layout(location = 0) out vec4 color;
+			in vec2 v_TexCoord;
 
-			in vec3 v_Position;
-
+			uniform sampler2D u_Texture;
 			void main()
 			{
-				color = vec4(0.2, 0.3, 0.8, 1.0);
+				color = texture(u_Texture, v_TexCoord);
 			}
 		)";
 
