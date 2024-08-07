@@ -15,6 +15,7 @@ include_directories(LypoEngine/dep/glad/include)
 
 file(GLOB_RECURSE CORE_SOURCES LypoEngine/src/core/*cpp LypoEngine/src/core/*.h)
 
+
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     file(GLOB_RECURSE PLATFORM_SOURCES LypoEngine/src/platform/windows/*.cpp LypoEngine/src/platform/windows/*.h)
     add_compile_definitions(LYPO_PLATFORM_WINDOWS)
@@ -23,6 +24,9 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     file(GLOB_RECURSE PLATFORM_SOURCES LypoEngine/src/platform/linux/*.cpp LypoEngine/src/platform/linux/*.h)
     file(GLOB_RECURSE RENDERING_SOURCES LypoEngine/src/platform/opengl/*cpp LypoEngine/src/platform/opengl/*.h)
     add_compile_definitions(LYPO_PLATFORM_LINUX)
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    file(GLOB_RECURSE PLATFORM_SOURCES LypoEngine/src/platform/macos/*.cpp LypoEngine/src/platform/macos/*.h)
+    file(GLOB_RECURSE RENDERING_SOURCES LypoEngine/src/platform/opengl/*cpp LypoEngine/src/platform/opengl/*.h)
 else()
     message(FATAL_ERROR "Unsupported platform: ${CMAKE_SYSTEM_NAME}")
 endif ()
