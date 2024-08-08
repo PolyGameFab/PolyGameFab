@@ -27,11 +27,6 @@ namespace Lypo{
         if(!data){
             LYPO_CORE_ERROR("Failed to load image!");
         }
-        else{
-            std:string msg = "Loaded image: "+std::string path_;
-            LYPO_CORE_INFO(msg);
-        }
-
 
         width_ = width;
         height_ = height;
