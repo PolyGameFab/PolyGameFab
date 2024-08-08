@@ -12,16 +12,10 @@ include_directories(LypoEngine/dep/glfw/include)
 add_subdirectory(LypoEngine/dep/glad)
 include_directories(LypoEngine/dep/glad/include)
 
-# Add the stb_image implementation file
 include_directories(LypoEngine/dep/stb_image)
 add_library(stb_image STATIC LypoEngine/dep/stb_image/stb_image.cpp)
 
-
-
 file(GLOB_RECURSE CORE_SOURCES LypoEngine/src/core/*cpp LypoEngine/src/core/*.h)
-
-file(GLOB_RECURSE VENDOR_SOURCES LypoEngine/vendor/*cpp LypoEngine/vendor/*.h)
-
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     file(GLOB_RECURSE PLATFORM_SOURCES LypoEngine/src/platform/windows/*.cpp LypoEngine/src/platform/windows/*.h)
