@@ -3,7 +3,7 @@
 //
 #pragma once
 
-#include "core/Rendering/Texture.h"
+#include "core/rendering/Texture.h"
 #include "lypch.h"
 
 namespace Lypo {
